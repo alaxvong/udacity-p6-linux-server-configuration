@@ -19,7 +19,7 @@ SSH Port: 2200
 - `$ sudo apt-get update`
 - `$ sudo apt-get upgrade`
 
-(You may be prompted a couple of times in the middle of the upgrade about packages having been locally modified. I chose to "Keep the local version currently installed").
+You may be prompted a couple of times in the middle of the upgrade about packages having been locally modified. I chose to "Keep the local version currently installed".
 
 ---
 #### 3. Add new user
@@ -30,7 +30,7 @@ SSH Port: 2200
 
 #### 4. Generate SSH Key
 - In a new shell window, generate a SSH key on your local machine: `$ ssh-keygen -t rsa`. I named it grader and left password blank.
-- Copy the contents of the public key `cat ~/.ssh/grader.pub`
+- Copy the contents of the public key `cat ~/.ssh/grader.pub | pbcopy` 
 
 ---
 
@@ -40,7 +40,7 @@ As the Ubuntu user, create __.ssh__ directory in grader's root directory
 - `$ sudo mkdir .ssh`
 
 Create __authorized_keys__ file in __.ssh__
-`$ cd .ssh`
+- `$ cd .ssh`
 - `$ sudo touch authorized_keys`
 
 Paste contents of __grader.pub__ from your local machine into __authorized_keys__
@@ -79,7 +79,7 @@ $ sudo ufw enable
 ```
 - The following command will now be necessary to SSH into the server:
 `$ ssh -i ~/.ssh/grader grader@52.34.171.107 -p 2200`
-- You may need to manually change the Firewall settings under the Networking tab of your Amazon Lightsail Ubunut Instance to SSH back into the server.
+- You may need to manually add TCP 2200 to the Firewall settings under the Networking tab of your Amazon Lightsail Ubunut Instance to SSH back into the server.
 
 ---
 
@@ -125,7 +125,7 @@ from project import app as application
 - Create virtualenv named __venv__ `$ sudo virtualenv venv`
 - Activate __venv__ `$ source venv/bin/activate`
 - Change virtualenv permission `$ sudo chmod -R 777 venv`
-- Configure Apache2 `$ sudo nano /etc/apache2/sites-available/catalog.conf`
+- Configure Apache2 (Be sure to swap out your ServerName) `$ sudo nano /etc/apache2/sites-available/catalog.conf`
 ```
 <VirtualHost *:80>
     ServerName 52.34.171.107
@@ -160,10 +160,7 @@ from project import app as application
 - `$ pip install psycopg2`
 
 
-- Switch to __postgres__ user 
-- `$ sudo su - postgres`
-
-
+- Switch to __postgres__ user `$ sudo su - postgres`
 - Configure database with limited permission user __catalog__ 
 - `$ psql`
 - `# CREATE USER catalog WITH PASSWORD 'catalogpw';`
@@ -181,8 +178,9 @@ from project import app as application
 - Rename cloned __git directory__ to __project__ `$ mv GitRepoName project`
 - `$ cd project`
 - Install python dependancies to run the application `$ pip install -r requirements.txt`
-- rename __main_project_file.py__ to __\_\_init\_\_.py__
+- rename __your_main_project_file.py__ to __\_\_init\_\_.py__ `$ mv project.py __init__.py`
 - Replaced the database engine related lines in the python files with `engine = create_engine('postgresql://catalog:catalogpw@localhost/catalog')` 
+- `$ nano database_setup.py` and `$ nano database_populate.py`
 - `$ service apache2 reload`
 
 ---
