@@ -160,7 +160,8 @@ Install PostgreSQL dependencies
 - `$ pip install psycopg2`
 
 Switch to __postgres__ user `$ sudo su - postgres`
-- Configure database with limited permission user __catalog__ 
+
+Configure database with limited permission user __catalog__ 
 - `$ psql`
 - `# CREATE USER catalog WITH PASSWORD 'catalogpw';`
 - `# ALTER USER catalog CREATEDB;`
