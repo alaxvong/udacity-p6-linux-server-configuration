@@ -122,9 +122,9 @@ from project import app as application
 ```
 - Install __PIP package manager__: `$ sudo apt-get install python-pip`
 - Install virtualenv `$ sudo pip install virtualenv`
-- Create virtualenv named __venv__ `$ sudo virtualenv venv`
-- Activate __venv__ `$ source venv/bin/activate`
-- Change virtualenv permission `$ sudo chmod -R 777 venv`
+    - Create virtualenv named __venv__ `$ sudo virtualenv venv`
+    - Activate __venv__ `$ source venv/bin/activate`
+    - Change virtualenv permission `$ sudo chmod -R 777 venv`
 - Configure Apache2 (Be sure to swap out your ServerName) `$ sudo nano /etc/apache2/sites-available/catalog.conf`
 ```
 <VirtualHost *:80>
@@ -154,13 +154,12 @@ from project import app as application
 ---
 
 #### 13. Configure PostgreSQL
-- Install PostgreSQL dependencies
+Install PostgreSQL dependencies
 - `$ sudo apt-get install libpq-dev python-dev`
 - `$ sudo apt-get install postgresql postgresql-contrib`
 - `$ pip install psycopg2`
 
-
-- Switch to __postgres__ user `$ sudo su - postgres`
+Switch to __postgres__ user `$ sudo su - postgres`
 - Configure database with limited permission user __catalog__ 
 - `$ psql`
 - `# CREATE USER catalog WITH PASSWORD 'catalogpw';`
@@ -180,7 +179,7 @@ from project import app as application
 - Install python dependancies to run the application `$ pip install -r requirements.txt`
 - rename __your_main_project_file.py__ to __\_\_init\_\_.py__ `$ mv project.py __init__.py`
 - Replaced the database engine related lines in the python files with `engine = create_engine('postgresql://catalog:catalogpw@localhost/catalog')` 
-- `$ nano database_setup.py` and `$ nano database_populate.py`
+    - `$ nano database_setup.py` and `$ nano database_populate.py`
 - `$ service apache2 reload`
 
 ---
